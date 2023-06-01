@@ -1,6 +1,6 @@
 def calcular_fatorial(n):
     if n < 0:
-        raise ValueError("O número deve ser não negativo.")
+        raise ValueError("Negative values are not alowed")
     if n == 0 or n == 1:
         return 1
     else:
