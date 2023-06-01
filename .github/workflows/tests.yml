@@ -1,23 +1,29 @@
-name: Testes
-
-on: [push, pull_request]
+name: Run Tests
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  testes:
+  test:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.8]
-
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
     steps:
-    - name: Configurar Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Verificar código
-      run: |
-        python -m pip install --upgrade pip
-        python -m unittest ../../testes.py
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Tests
+        run: python testes.py
