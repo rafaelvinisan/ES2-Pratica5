@@ -1,7 +1,7 @@
 def calcular_fatorial(n):
     if n < 0:
         raise ValueError("Negative values are not alowed")
-    if n == 0 or n == 1:
+    if n < 2:
         return 1
     else:
         return n * calcular_fatorial(n - 1)
